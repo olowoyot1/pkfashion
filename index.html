@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PK Fashion | Premium Ready-to-Wear</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rosePrimary: '#E8A0B0',
+                        roseDeep: '#C75B7A',
+                        blush: '#FCE8EE',
+                        charcoal: '#242124',
+                        cream: '#FFF8F5'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8F5;
+            color: #242124;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8A0B0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C75B7A;
+        }
+    </style>
+</head>
+<body class="bg-cream text-charcoal min-h-screen flex flex-col selection:bg-rosePrimary selection:text-white">
+
+    <!-- Announcement Bar -->
+    <div id="announcement-bar" class="bg-charcoal text-white text-xs sm:text-sm py-2.5 px-4 text-center font-medium tracking-wide transition-all duration-300 relative z-50">
+        <div class="flex items-center justify-center space-x-2">
+            <span id="announcement-text" class="transition-opacity duration-500">Welcome to PK Fashion. Discover Your Style & Elegance.</span>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header id="header" class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-rosePrimary/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-charcoal hover:text-roseDeep transition-colors" aria-label="Toggle Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#" onclick="switchView('home')" class="flex flex-col items-center lg:items-start group">
+                <span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-charcoal group-hover:text-roseDeep transition-colors">PK FASHION</span>
+                <span class="text-[10px] tracking-[0.25em] text-roseDeep uppercase font-medium">Ready-To-Wear</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wider uppercase">
+                <a href="#" onclick="switchView('home')" class="text-charcoal hover:text-roseDeep transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep">Home</a>
+                <a href="#" onclick="switchView('shop')" class="text-charcoal hover:text-roseDeep transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep">Shop All</a>
+                <a href="#" onclick="filterByTag('new')" class="text-charcoal hover:text-roseDeep transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep">New Arrivals</a>
+                <a href="#" onclick="openCategoriesModal()" class="text-charcoal hover:text-roseDeep transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep">Categories</a>
+                <a href="#" onclick="filterByTag('bestseller')" class="text-charcoal hover:text-roseDeep transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep">Best Sellers</a>
+                <a href="#" onclick="filterByTag('sale')" class="text-roseDeep hover:text-charcoal transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep font-semibold">Sales</a>
+                <a href="#" onclick="switchView('about')" class="text-charcoal hover:text-roseDeep transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep">About</a>
+                <a href="#" onclick="switchView('contact')" class="text-charcoal hover:text-roseDeep transition-colors py-2 border-b-2 border-transparent hover:border-roseDeep">Contact</a>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="flex items-center space-x-4 sm:space-x-6">
+                <button onclick="toggleSearchModal()" class="p-2 text-charcoal hover:text-roseDeep transition-colors relative" title="Search">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+                <button onclick="openAccountModal()" class="p-2 text-charcoal hover:text-roseDeep transition-colors relative" title="Customer Account">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                </button>
+                <button onclick="toggleWishlistDrawer()" class="p-2 text-charcoal hover:text-roseDeep transition-colors relative" title="Wishlist">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    <span id="wishlist-badge" class="absolute -top-1 -right-1 bg-roseDeep text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
+                <button onclick="toggleCartDrawer()" class="p-2 text-charcoal hover:text-roseDeep transition-colors relative" title="Shopping Cart">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-roseDeep text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+                <button onclick="toggleAdminDashboard()" class="hidden sm:flex items-center space-x-1 px-3 py-1.5 bg-rosePrimary/20 text-roseDeep rounded-full text-xs font-semibold hover:bg-rosePrimary/30 transition-colors" title="Admin Dashboard">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>Admin</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-charcoal/50 backdrop-blur-sm hidden transition-opacity opacity-0">
+        <div class="absolute left-0 top-0 bottom-0 w-80 bg-cream p-6 shadow-2xl flex flex-col justify-between transform -translate-x-full transition-transform duration-300" id="mobile-menu-panel">
+            <div>
+                <div class="flex items-center justify-between pb-6 border-b border-rosePrimary/30">
+                    <span class="font-serif text-xl font-bold tracking-wider">PK FASHION</span>
+                    <button onclick="toggleMobileMenu()" class="p-2 text-charcoal hover:text-roseDeep">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <nav class="flex flex-col space-y-4 pt-6 text-base font-medium">
+                    <a href="#" onclick="switchView('home'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">Home</a>
+                    <a href="#" onclick="switchView('shop'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">Shop All</a>
+                    <a href="#" onclick="filterByTag('new'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">New Arrivals</a>
+                    <a href="#" onclick="openCategoriesModal(); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">Categories</a>
+                    <a href="#" onclick="filterByTag('bestseller'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">Best Sellers</a>
+                    <a href="#" onclick="filterByTag('sale'); toggleMobileMenu();" class="py-2 text-roseDeep font-semibold hover:text-charcoal transition-colors">Sales & Offers</a>
+                    <a href="#" onclick="switchView('about'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">About Us</a>
+                    <a href="#" onclick="switchView('contact'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">Contact</a>
+                    <a href="#" onclick="toggleAdminDashboard(); toggleMobileMenu();" class="py-2 text-roseDeep font-bold flex items-center space-x-2">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span>Admin Dashboard</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="text-xs text-charcoal/60 text-center pb-4">
+                &copy; 2026 PK Fashion. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow">
+
+        <!-- VIEW 1: HOME -->
+        <div id="view-home" class="view-section">
+            <!-- Hero Section -->
+            <section class="relative bg-rosePrimary/10 overflow-hidden py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 text-center lg:text-left z-10">
+                        <span class="inline-block px-4 py-1.5 bg-rosePrimary/20 text-roseDeep rounded-full text-xs font-semibold tracking-widest uppercase">New Spring Collection 2026</span>
+                        <h1 class="font-serif text-4xl sm:text-6xl font-bold text-charcoal tracking-tight leading-tight">
+                            Your Style. <br><span class="italic font-normal text-roseDeep">Your Statement.</span>
+                        </h1>
+                        <p class="text-charcoal/80 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                            Discover ready-to-wear fashion that celebrates your confidence, individuality, and everyday elegance with luxurious fabrics and tailored fits.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                            <button onclick="switchView('shop')" class="w-full sm:w-auto px-8 py-4 bg-roseDeep text-white font-medium rounded-full shadow-lg hover:bg-charcoal transition-all duration-300 text-center tracking-wide">
+                                Shop Collection
+                            </button>
+                            <button onclick="filterByTag('new')" class="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-charcoal text-charcoal font-medium rounded-full hover:bg-charcoal hover:text-white transition-all duration-300 text-center tracking-wide">
+                                Explore New Arrivals
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        <div class="relative w-full max-w-md lg:max-w-lg aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" alt="High Fashion Editorial" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent flex items-end p-8">
+                                <div class="text-white">
+                                    <p class="text-xs uppercase tracking-widest text-rosePrimary font-semibold">Featured Look</p>
+                                    <p class="font-serif text-2xl font-bold">The Rose Silk Ensemble</p>
+                                    <button onclick="openProductDetail('prod-1')" class="mt-2 text-xs uppercase tracking-widest underline underline-offset-4 hover:text-rosePrimary transition-colors">Shop This Look</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shop by Category Grid -->
+            <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-semibold tracking-widest text-roseDeep uppercase">Explore Collections</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">Shop by Category</h2>
+                    <div class="w-16 h-0.5 bg-roseDeep mx-auto"></div>
+                </div>
+                <div id="category-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- New Arrivals Section -->
+            <section class="py-16 bg-white/60 border-y border-rosePrimary/20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                        <div class="space-y-2">
+                            <span class="text-xs font-semibold tracking-widest text-roseDeep uppercase">Just Landed</span>
+                            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">New Arrivals</h2>
+                        </div>
+                        <button onclick="filterByTag('new'); switchView('shop');" class="mt-4 md:mt-0 text-sm font-semibold text-roseDeep hover:text-charcoal transition-colors flex items-center space-x-1 group">
+                            <span>View All New Arrivals</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                    <div id="new-arrivals-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Promotional Banner -->
+            <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-r from-rosePrimary/30 via-rosePrimary/20 to-blush rounded-3xl p-8 sm:p-16 border border-rosePrimary/40 flex flex-col lg:flex-row items-center justify-between shadow-lg">
+                    <div class="space-y-6 max-w-xl text-center lg:text-left mb-8 lg:mb-0">
+                        <span class="px-4 py-1.5 bg-roseDeep text-white rounded-full text-xs font-semibold tracking-widest uppercase">Special Offer</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-charcoal leading-tight">Spring Elegance Sale</h2>
+                        <p class="text-charcoal/80 text-base">Enjoy 10% off your entire order with code <span class="font-bold text-roseDeep">PKFASHION10</span> at checkout. Premium ready-to-wear tailored for the modern woman.</p>
+                        <button onclick="switchView('shop')" class="px-8 py-3.5 bg-charcoal text-white font-medium rounded-full shadow hover:bg-roseDeep transition-colors text-sm uppercase tracking-wider">
+                            Shop The Sale
+                        </button>
+                    </div>
+                    <div class="w-full lg:w-1/2 flex justify-center">
+                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600" alt="Special Offer" class="rounded-2xl shadow-xl max-h-80 object-cover w-full max-w-md">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Best Sellers Section -->
+            <section class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                        <div class="space-y-2">
+                            <span class="text-xs font-semibold tracking-widest text-roseDeep uppercase">Most Loved</span>
+                            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">Best Sellers</h2>
+                        </div>
+                        <button onclick="filterByTag('bestseller'); switchView('shop');" class="mt-4 md:mt-0 text-sm font-semibold text-roseDeep hover:text-charcoal transition-colors flex items-center space-x-1 group">
+                            <span>Explore Best Sellers</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                    <div id="best-sellers-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customer Reviews Section -->
+            <section class="py-16 bg-white/40 border-y border-rosePrimary/20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                        <span class="text-xs font-semibold tracking-widest text-roseDeep uppercase">Testimonials</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">Loved By Our Clients</h2>
+                        <div class="w-16 h-0.5 bg-roseDeep mx-auto"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-cream p-8 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-4">
+                            <div class="flex text-roseDeep space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <p class="text-charcoal/80 italic text-sm">"The quality of the silk midi dress is immaculate. Received so many compliments at the Lagos Fashion Gala. Customer service is top-notch!"</p>
+                            <div>
+                                <p class="font-semibold text-sm">Amina Bello</p>
+                                <p class="text-xs text-charcoal/60">Verified Buyer, Lagos</p>
+                            </div>
+                        </div>
+                        <div class="bg-cream p-8 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-4">
+                            <div class="flex text-roseDeep space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <p class="text-charcoal/80 italic text-sm">"Fast delivery within Abuja and packaged like a luxury gift. The two-piece set fits like it was custom tailored for me."</p>
+                            <div>
+                                <p class="font-semibold text-sm">Chinyere Okoro</p>
+                                <p class="text-xs text-charcoal/60">Verified Buyer, Abuja</p>
+                            </div>
+                        </div>
+                        <div class="bg-cream p-8 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-4">
+                            <div class="flex text-roseDeep space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <p class="text-charcoal/80 italic text-sm">"PK Fashion is my go-to brand for workwear and evening events. Elegant designs that stand out effortlessly."</p>
+                            <div>
+                                <p class="font-semibold text-sm">Fatima Aliyu</p>
+                                <p class="text-xs text-charcoal/60">Verified Buyer, Port Harcourt</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW 2: SHOP ALL & CATALOG -->
+        <div id="view-shop" class="view-section hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Shop Header -->
+                <div class="mb-10 text-center space-y-3">
+                    <h1 class="font-serif text-4xl font-bold text-charcoal">Complete Collection</h1>
+                    <p class="text-charcoal/70 max-w-xl mx-auto text-sm">Explore our exquisite ready-to-wear pieces designed for the confident, modern woman.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Filters Sidebar -->
+                    <div class="w-full lg:w-72 bg-white/80 p-6 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-6 h-fit">
+                        <div class="flex items-center justify-between pb-4 border-b border-rosePrimary/20">
+                            <span class="font-serif font-bold text-lg">Filters</span>
+                            <button onclick="resetFilters()" class="text-xs text-roseDeep hover:underline">Reset All</button>
+                        </div>
+                        <!-- Search Filter -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Search</label>
+                            <div class="relative">
+                                <input type="text" id="filter-search" oninput="applyFilters()" placeholder="Search products..." class="w-full bg-cream px-3 py-2 text-sm rounded-lg border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                                <i data-lucide="search" class="w-4 h-4 absolute right-3 top-2.5 text-charcoal/40"></i>
+                            </div>
+                        </div>
+                        <!-- Category Filter -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Category</label>
+                            <div id="filter-categories" class="space-y-1.5 max-h-48 overflow-y-auto pr-2">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                        <!-- Size Filter -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Size</label>
+                            <div class="flex flex-wrap gap-2" id="filter-sizes">
+                                <button onclick="toggleSizeFilter('XS')" class="size-pill px-3 py-1 text-xs rounded-md border border-rosePrimary/40 hover:bg-rosePrimary hover:text-white transition-colors">XS</button>
+                                <button onclick="toggleSizeFilter('S')" class="size-pill px-3 py-1 text-xs rounded-md border border-rosePrimary/40 hover:bg-rosePrimary hover:text-white transition-colors">S</button>
+                                <button onclick="toggleSizeFilter('M')" class="size-pill px-3 py-1 text-xs rounded-md border border-rosePrimary/40 hover:bg-rosePrimary hover:text-white transition-colors">M</button>
+                                <button onclick="toggleSizeFilter('L')" class="size-pill px-3 py-1 text-xs rounded-md border border-rosePrimary/40 hover:bg-rosePrimary hover:text-white transition-colors">L</button>
+                                <button onclick="toggleSizeFilter('XL')" class="size-pill px-3 py-1 text-xs rounded-md border border-rosePrimary/40 hover:bg-rosePrimary hover:text-white transition-colors">XL</button>
+                            </div>
+                        </div>
+                        <!-- Price Range Filter -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-charcoal">
+                                <span>Max Price</span>
+                                <span id="price-output" class="text-roseDeep">₦500,000</span>
+                            </div>
+                            <input type="range" id="filter-price" min="10000" max="500000" step="10000" value="500000" oninput="applyFilters()" class="w-full accent-roseDeep">
+                        </div>
+                    </div>
+
+                    <!-- Products Grid & Sorting -->
+                    <div class="flex-grow space-y-6">
+                        <div class="flex flex-col sm:flex-row items-center justify-between bg-white/80 p-4 rounded-2xl shadow-sm border border-rosePrimary/20">
+                            <p id="product-count" class="text-sm text-charcoal/70 mb-2 sm:mb-0">Showing products</p>
+                            <div class="flex items-center space-x-2">
+                                <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Sort By:</label>
+                                <select id="sort-select" onchange="applyFilters()" class="bg-cream px-3 py-1.5 text-sm rounded-lg border border-rosePrimary/30 focus:outline-none focus:border-roseDeep font-medium">
+                                    <option value="newest">Newest Arrivals</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="bestseller">Best Sellers</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Product Cards Grid -->
+                        <div id="shop-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- Populated dynamically -->
+                        </div>
+
+                        <!-- No Results State -->
+                        <div id="no-results" class="hidden text-center py-20 space-y-4">
+                            <i data-lucide="frown" class="w-12 h-12 mx-auto text-roseDeep"></i>
+                            <h3 class="font-serif text-2xl font-bold">No Products Found</h3>
+                            <p class="text-charcoal/70 text-sm">Try adjusting your search or filter criteria to find what you are looking for.</p>
+                            <button onclick="resetFilters()" class="px-6 py-2.5 bg-roseDeep text-white text-sm font-medium rounded-full hover:bg-charcoal transition-colors">Reset Filters</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: ABOUT US -->
+        <div id="view-about" class="view-section hidden py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center space-y-4">
+                    <span class="text-xs font-semibold tracking-widest text-roseDeep uppercase">Our Heritage</span>
+                    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-charcoal">About PK Fashion</h1>
+                    <div class="w-16 h-0.5 bg-roseDeep mx-auto"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=600" alt="About PK Fashion" class="rounded-2xl shadow-xl w-full h-96 object-cover">
+                    <div class="space-y-4 text-charcoal/80 leading-relaxed text-sm sm:text-base">
+                        <p>Founded in Lagos, <strong class="text-charcoal font-semibold">PK Fashion</strong> is a premier ready-to-wear fashion brand dedicated to celebrating feminine elegance, confidence, and modern luxury.</p>
+                        <p>Every piece in our collection is meticulously crafted with premium fabrics—ranging from pure silks to rich crepes—tailored precisely to empower women in boardroom meetings, gala evenings, and everyday life.</p>
+                        <p class="text-roseDeep font-serif font-bold text-lg">"Your Style. Your Statement."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: CONTACT -->
+        <div id="view-contact" class="view-section hidden py-20">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                <div class="text-center space-y-3">
+                    <span class="text-xs font-semibold tracking-widest text-roseDeep uppercase">Get in Touch</span>
+                    <h1 class="font-serif text-4xl font-bold text-charcoal">Contact Our Concierge</h1>
+                    <div class="w-16 h-0.5 bg-roseDeep mx-auto"></div>
+                </div>
+                <div class="bg-white/80 p-8 sm:p-12 rounded-3xl shadow-sm border border-rosePrimary/20 space-y-6">
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Full Name</label>
+                                <input type="text" required class="w-full bg-cream px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="Amina Bello">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Email Address</label>
+                                <input type="email" required class="w-full bg-cream px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="amina@example.com">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Subject</label>
+                            <input type="text" required class="w-full bg-cream px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="Order Inquiry / Styling Advice">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Message</label>
+                            <textarea rows="5" required class="w-full bg-cream px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="How can we assist you today?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-roseDeep text-white font-medium rounded-xl hover:bg-charcoal transition-colors tracking-wide text-sm uppercase">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <!-- Shopping Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 bg-charcoal/50 backdrop-blur-sm hidden transition-opacity opacity-0 flex justify-end">
+        <div class="w-full max-w-md bg-cream h-full shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300" id="cart-drawer-panel">
+            <div class="p-6 border-b border-rosePrimary/30 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-roseDeep"></i>
+                    <span class="font-serif font-bold text-xl">Shopping Bag</span>
+                </div>
+                <button onclick="toggleCartDrawer()" class="p-2 text-charcoal hover:text-roseDeep">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4 divide-y divide-rosePrimary/20">
+                <!-- Populated dynamically -->
+            </div>
+            <div class="p-6 border-t border-rosePrimary/30 bg-white/60 space-y-4">
+                <!-- Promo Code -->
+                <div class="flex space-x-2">
+                    <input type="text" id="promo-code-input" placeholder="Promo Code (e.g. PKFASHION10)" class="flex-grow bg-cream px-3 py-2 text-sm rounded-lg border border-rosePrimary/30 focus:outline-none focus:border-roseDeep uppercase">
+                    <button onclick="applyPromoCode()" class="px-4 py-2 bg-charcoal text-white text-xs font-semibold rounded-lg hover:bg-roseDeep transition-colors">Apply</button>
+                </div>
+                <div id="promo-msg" class="text-xs text-roseDeep font-medium hidden"></div>
+
+                <div class="space-y-1.5 text-sm">
+                    <div class="flex justify-between text-charcoal/70">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">₦0</span>
+                    </div>
+                    <div id="cart-discount-row" class="flex justify-between text-roseDeep font-medium hidden">
+                        <span>Discount (10%)</span>
+                        <span id="cart-discount">-₦0</span>
+                    </div>
+                    <div class="flex justify-between text-charcoal/70">
+                        <span>Estimated Shipping</span>
+                        <span id="cart-shipping">₦5,000</span>
+                    </div>
+                    <div class="flex justify-between font-serif font-bold text-lg text-charcoal pt-2 border-t border-rosePrimary/20">
+                        <span>Total</span>
+                        <span id="cart-total">₦0</span>
+                    </div>
+                </div>
+                <button onclick="openCheckout()" class="w-full py-3.5 bg-roseDeep text-white font-medium rounded-xl hover:bg-charcoal transition-colors tracking-wide text-sm uppercase shadow-md">
+                    Proceed to Secure Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div id="wishlist-drawer" class="fixed inset-0 z-50 bg-charcoal/50 backdrop-blur-sm hidden transition-opacity opacity-0 flex justify-end">
+        <div class="w-full max-w-md bg-cream h-full shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300" id="wishlist-drawer-panel">
+            <div class="p-6 border-b border-rosePrimary/30 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="heart" class="w-5 h-5 text-roseDeep"></i>
+                    <span class="font-serif font-bold text-xl">My Wishlist</span>
+                </div>
+                <button onclick="toggleWishlistDrawer()" class="p-2 text-charcoal hover:text-roseDeep">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="wishlist-items-container" class="flex-grow overflow-y-auto p-6 space-y-4">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cream w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col md:flex-row" id="product-modal-content">
+            <button onclick="closeProductDetail()" class="absolute top-4 right-4 z-10 p-2 bg-white/80 rounded-full text-charcoal hover:text-roseDeep shadow">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <!-- Product Images -->
+            <div class="w-full md:w-1/2 bg-rosePrimary/10 p-6 flex items-center justify-center relative">
+                <img id="modal-img" src="" alt="Product Detail" class="rounded-2xl max-h-[450px] w-full object-cover shadow-lg">
+            </div>
+            <!-- Product Details -->
+            <div class="w-full md:w-1/2 p-8 overflow-y-auto space-y-6">
+                <div>
+                    <span id="modal-category" class="text-xs uppercase tracking-widest text-roseDeep font-semibold">Category</span>
+                    <h2 id="modal-title" class="font-serif text-3xl font-bold text-charcoal mt-1">Product Title</h2>
+                    <div class="flex items-center space-x-4 mt-2">
+                        <span id="modal-price" class="text-2xl font-bold text-charcoal">₦0</span>
+                        <span id="modal-old-price" class="text-base text-charcoal/50 line-through hidden">₦0</span>
+                    </div>
+                </div>
+
+                <p id="modal-desc" class="text-charcoal/80 text-sm leading-relaxed">Description goes here.</p>
+
+                <!-- Color Selection -->
+                <div class="space-y-2">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Color: <span id="selected-color-name" class="font-bold text-roseDeep">Rose Pink</span></label>
+                    <div id="modal-colors" class="flex space-x-3">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Size Selection -->
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Select Size</label>
+                        <button onclick="openSizeGuide()" class="text-xs text-roseDeep underline">Size Guide</button>
+                    </div>
+                    <div id="modal-sizes" class="flex flex-wrap gap-2">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Stock & Add to Bag -->
+                <div class="pt-4 space-y-4 border-t border-rosePrimary/20">
+                    <p id="modal-stock-status" class="text-xs font-semibold text-emerald-600">In Stock (Ready to Ship)</p>
+                    <button onclick="addToCartFromModal()" class="w-full py-4 bg-roseDeep text-white font-medium rounded-xl hover:bg-charcoal transition-colors tracking-wide text-sm uppercase shadow-lg flex items-center justify-center space-x-2">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span>Add to Shopping Bag</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Size Guide Modal -->
+    <div id="size-guide-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cream w-full max-w-2xl rounded-3xl shadow-2xl p-8 relative space-y-6">
+            <button onclick="closeSizeGuide()" class="absolute top-4 right-4 p-2 text-charcoal hover:text-roseDeep">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <h3 class="font-serif text-2xl font-bold">Size Guide</h3>
+                <p class="text-xs text-charcoal/70">Measurements in Centimetres (cm) and Inches (in)</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-rosePrimary/20 text-charcoal">
+                            <th class="p-3">Size</th>
+                            <th class="p-3">Bust (cm / in)</th>
+                            <th class="p-3">Waist (cm / in)</th>
+                            <th class="p-3">Hips (cm / in)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-rosePrimary/20">
+                        <tr><td class="p-3 font-bold">XS</td><td class="p-3">82-85cm / 32-33"</td><td class="p-3">62-65cm / 24-25"</td><td class="p-3">88-91cm / 34-35"</td></tr>
+                        <tr><td class="p-3 font-bold">S</td><td class="p-3">86-89cm / 34-35"</td><td class="p-3">66-69cm / 26-27"</td><td class="p-3">92-95cm / 36-37"</td></tr>
+                        <tr><td class="p-3 font-bold">M</td><td class="p-3">90-93cm / 35-36"</td><td class="p-3">70-73cm / 27-28"</td><td class="p-3">96-99cm / 38-39"</td></tr>
+                        <tr><td class="p-3 font-bold">L</td><td class="p-3">94-97cm / 37-38"</td><td class="p-3">74-77cm / 29-30"</td><td class="p-3">100-103cm / 39-40"</td></tr>
+                        <tr><td class="p-3 font-bold">XL</td><td class="p-3">98-102cm / 39-40"</td><td class="p-3">78-82cm / 31-32"</td><td class="p-3">104-108cm / 41-42"</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Account Modal (Login / Signup / Profile / Orders) -->
+    <div id="account-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cream w-full max-w-lg rounded-3xl shadow-2xl p-8 relative space-y-6">
+            <button onclick="closeAccountModal()" class="absolute top-4 right-4 p-2 text-charcoal hover:text-roseDeep">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div id="account-auth-container" class="space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="font-serif text-3xl font-bold">Customer Portal</span>
+                    <p class="text-xs text-charcoal/70">Sign in or register to track orders and manage your wishlist.</p>
+                </div>
+                <div class="flex border-b border-rosePrimary/30">
+                    <button onclick="switchAuthTab('login')" id="tab-login-btn" class="flex-1 pb-3 text-sm font-bold text-roseDeep border-b-2 border-roseDeep">Sign In</button>
+                    <button onclick="switchAuthTab('signup')" id="tab-signup-btn" class="flex-1 pb-3 text-sm font-semibold text-charcoal/60">Register</button>
+                </div>
+                <!-- Login Form -->
+                <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Email Address</label>
+                        <input type="email" id="login-email" required class="w-full bg-white px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="amina@example.com">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Password</label>
+                        <input type="password" id="login-password" required class="w-full bg-white px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-roseDeep text-white font-medium rounded-xl hover:bg-charcoal transition-colors text-sm uppercase">Sign In</button>
+                </form>
+                <!-- Signup Form -->
+                <form id="signup-form" onsubmit="handleSignup(event)" class="space-y-4 hidden">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Full Name</label>
+                        <input type="text" id="signup-name" required class="w-full bg-white px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="Amina Bello">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Email Address</label>
+                        <input type="email" id="signup-email" required class="w-full bg-white px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="amina@example.com">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Password</label>
+                        <input type="password" id="signup-password" required class="w-full bg-white px-4 py-3 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-roseDeep text-white font-medium rounded-xl hover:bg-charcoal transition-colors text-sm uppercase">Create Account</button>
+                </form>
+            </div>
+
+            <!-- Logged In Profile & Orders View -->
+            <div id="account-profile-container" class="space-y-6 hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-rosePrimary/30">
+                    <div>
+                        <h3 id="profile-name" class="font-serif text-2xl font-bold">User Name</h3>
+                        <p id="profile-email" class="text-xs text-charcoal/60">email@example.com</p>
+                    </div>
+                    <button onclick="handleLogout()" class="px-4 py-2 bg-charcoal/10 text-charcoal text-xs font-semibold rounded-lg hover:bg-charcoal hover:text-white transition-colors">Sign Out</button>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-serif font-bold text-lg">My Orders & Tracking</h4>
+                    <div id="customer-orders-list" class="space-y-3 max-h-64 overflow-y-auto">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal (Multi-Step with Paystack Simulation) -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cream w-full max-w-2xl rounded-3xl shadow-2xl p-8 relative space-y-6 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeCheckout()" class="absolute top-4 right-4 p-2 text-charcoal hover:text-roseDeep">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="font-serif text-3xl font-bold">Secure Checkout</span>
+                <p class="text-xs text-charcoal/70">Powered by Paystack Secure Gateway (NGN ₦)</p>
+            </div>
+
+            <form id="checkout-form" onsubmit="processPayment(event)" class="space-y-6">
+                <div class="space-y-4">
+                    <h4 class="font-serif font-bold text-lg border-b border-rosePrimary/20 pb-2">1. Delivery Information</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Full Name</label>
+                            <input type="text" id="checkout-name" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Email Address</label>
+                            <input type="email" id="checkout-email" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Phone Number</label>
+                            <input type="tel" id="checkout-phone" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="08012345678">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">State / City</label>
+                            <select id="checkout-city" onchange="updateShippingFee()" class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                                <option value="Lagos">Lagos (₦4,000)</option>
+                                <option value="Abuja">Abuja (₦6,000)</option>
+                                <option value="Port Harcourt">Port Harcourt (₦6,000)</option>
+                                <option value="Other Nigeria">Other Nigerian States (₦8,000)</option>
+                                <option value="International">International Shipping (₦35,000)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Delivery Address</label>
+                        <input type="text" id="checkout-address" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="Plot 123, Victoria Island">
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-4 border-t border-rosePrimary/20">
+                    <h4 class="font-serif font-bold text-lg border-b border-rosePrimary/20 pb-2">2. Payment Method</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <label class="flex items-center space-x-3 p-4 bg-white rounded-xl border border-rosePrimary/30 cursor-pointer hover:border-roseDeep">
+                            <input type="radio" name="payment-method" value="paystack" checked class="accent-roseDeep">
+                            <span class="text-sm font-medium">Paystack (Card / USSD / Bank)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-4 bg-white rounded-xl border border-rosePrimary/30 cursor-pointer hover:border-roseDeep">
+                            <input type="radio" name="payment-method" value="transfer" class="accent-roseDeep">
+                            <span class="text-sm font-medium">Bank Transfer</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-4 bg-white rounded-xl border border-rosePrimary/30 cursor-pointer hover:border-roseDeep">
+                            <input type="radio" name="payment-method" value="flutterwave" class="accent-roseDeep">
+                            <span class="text-sm font-medium">Flutterwave</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white/60 rounded-xl space-y-2 text-sm border border-rosePrimary/20">
+                    <div class="flex justify-between"><span>Items Subtotal:</span><span id="checkout-subtotal">₦0</span></div>
+                    <div class="flex justify-between"><span>Shipping Fee:</span><span id="checkout-shipping">₦4,000</span></div>
+                    <div class="flex justify-between font-bold text-lg text-roseDeep pt-2 border-t border-rosePrimary/20"><span>Total Payable:</span><span id="checkout-final-total">₦0</span></div>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-roseDeep text-white font-medium rounded-xl hover:bg-charcoal transition-colors tracking-wide text-sm uppercase shadow-lg">
+                    Pay Securely Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PROTECTED ADMIN DASHBOARD -->
+    <div id="admin-dashboard-modal" class="fixed inset-0 z-50 bg-charcoal/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-6">
+        <div class="bg-cream w-full max-w-6xl rounded-3xl shadow-2xl overflow-hidden relative h-[95vh] flex flex-col">
+            <!-- Admin Header -->
+            <div class="p-6 bg-charcoal text-white flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-rosePrimary"></i>
+                    <span class="font-serif font-bold text-2xl tracking-wider">PK Fashion Admin Dashboard</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleAdminDashboard()" class="p-2 text-white/80 hover:text-white">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Tabs Navigation -->
+            <div class="flex bg-rosePrimary/20 border-b border-rosePrimary/30 overflow-x-auto px-6">
+                <button onclick="switchAdminTab('sales')" id="admin-tab-sales" class="px-6 py-3.5 text-sm font-bold text-roseDeep border-b-2 border-roseDeep whitespace-nowrap">Sales Overview</button>
+                <button onclick="switchAdminTab('products')" id="admin-tab-products" class="px-6 py-3.5 text-sm font-semibold text-charcoal/70 hover:text-charcoal whitespace-nowrap">Product Management</button>
+                <button onclick="switchAdminTab('orders')" id="admin-tab-orders" class="px-6 py-3.5 text-sm font-semibold text-charcoal/70 hover:text-charcoal whitespace-nowrap">Order Management</button>
+                <button onclick="switchAdminTab('promos')" id="admin-tab-promos" class="px-6 py-3.5 text-sm font-semibold text-charcoal/70 hover:text-charcoal whitespace-nowrap">Promotions & Coupons</button>
+            </div>
+
+            <!-- Admin Content Area -->
+            <div class="flex-grow overflow-y-auto p-8 space-y-8 bg-cream">
+                <!-- TAB 1: Sales Overview -->
+                <div id="admin-view-sales" class="space-y-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-2">
+                            <span class="text-xs uppercase tracking-wider text-charcoal/60 font-semibold">Total Revenue</span>
+                            <h3 id="admin-total-revenue" class="font-serif text-3xl font-bold text-roseDeep">₦0</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-2">
+                            <span class="text-xs uppercase tracking-wider text-charcoal/60 font-semibold">Total Orders</span>
+                            <h3 id="admin-total-orders" class="font-serif text-3xl font-bold text-charcoal">0</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-2">
+                            <span class="text-xs uppercase tracking-wider text-charcoal/60 font-semibold">Active Products</span>
+                            <h3 id="admin-total-products" class="font-serif text-3xl font-bold text-charcoal">0</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-rosePrimary/20 space-y-2">
+                            <span class="text-xs uppercase tracking-wider text-charcoal/60 font-semibold">Average Order Value</span>
+                            <h3 id="admin-avg-order" class="font-serif text-3xl font-bold text-charcoal">₦0</h3>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-rosePrimary/20 space-y-6">
+                        <h4 class="font-serif font-bold text-xl">Recent Transactions</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead>
+                                    <tr class="bg-rosePrimary/10 text-charcoal">
+                                        <th class="p-3">Order ID</th>
+                                        <th class="p-3">Customer</th>
+                                        <th class="p-3">Total</th>
+                                        <th class="p-3">Status</th>
+                                        <th class="p-3">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-recent-transactions" class="divide-y divide-rosePrimary/20">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Product Management -->
+                <div id="admin-view-products" class="space-y-8 hidden">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-serif font-bold text-xl">Catalog Inventory Management</h4>
+                        <button onclick="openAddProductModal()" class="px-5 py-2.5 bg-roseDeep text-white text-xs font-semibold rounded-xl hover:bg-charcoal transition-colors uppercase tracking-wider">Add New Product</button>
+                    </div>
+                    <div class="bg-white rounded-3xl shadow-sm border border-rosePrimary/20 overflow-hidden">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="bg-rosePrimary/10 text-charcoal">
+                                    <th class="p-4">Image</th>
+                                    <th class="p-4">Product Name</th>
+                                    <th class="p-4">Category</th>
+                                    <th class="p-4">Price</th>
+                                    <th class="p-4">Tags</th>
+                                    <th class="p-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-products-table" class="divide-y divide-rosePrimary/20">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 3: Order Management -->
+                <div id="admin-view-orders" class="space-y-8 hidden">
+                    <h4 class="font-serif font-bold text-xl">Customer Orders & Fulfillment</h4>
+                    <div class="bg-white rounded-3xl shadow-sm border border-rosePrimary/20 overflow-hidden">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="bg-rosePrimary/10 text-charcoal">
+                                    <th class="p-4">Order ID</th>
+                                    <th class="p-4">Customer</th>
+                                    <th class="p-4">Items</th>
+                                    <th class="p-4">Total</th>
+                                    <th class="p-4">Status</th>
+                                    <th class="p-4 text-right">Update Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-orders-table" class="divide-y divide-rosePrimary/20">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 4: Promotions & Coupons -->
+                <div id="admin-view-promos" class="space-y-8 hidden">
+                    <h4 class="font-serif font-bold text-xl">Active Promotional Discount Codes</h4>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-rosePrimary/20 space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-cream rounded-xl border border-rosePrimary/30">
+                            <div>
+                                <p class="font-bold text-roseDeep text-lg">PKFASHION10</p>
+                                <p class="text-xs text-charcoal/70">10% discount on all ready-to-wear orders. No expiry.</p>
+                            </div>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="product-form-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cream w-full max-w-xl rounded-3xl shadow-2xl p-8 relative space-y-6 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAddProductModal()" class="absolute top-4 right-4 p-2 text-charcoal hover:text-roseDeep">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 id="product-form-title" class="font-serif text-2xl font-bold">Add New Product</h3>
+            <form onsubmit="saveProduct(event)" class="space-y-4">
+                <input type="hidden" id="edit-product-id">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Product Name</label>
+                    <input type="text" id="form-name" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Category</label>
+                        <select id="form-category" class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                            <option value="Dresses">Dresses</option>
+                            <option value="Tops & Blouses">Tops & Blouses</option>
+                            <option value="Two-Piece Sets">Two-Piece Sets</option>
+                            <option value="Trousers & Jeans">Trousers & Jeans</option>
+                            <option value="Skirts">Skirts</option>
+                            <option value="Casual Wear">Casual Wear</option>
+                            <option value="Workwear">Workwear</option>
+                            <option value="Occasion Wear">Occasion Wear</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Price (₦)</label>
+                        <input type="number" id="form-price" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Image URL</label>
+                    <input type="url" id="form-image" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep" placeholder="https://images.unsplash.com/...">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Description</label>
+                    <textarea id="form-desc" rows="3" required class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep"></textarea>
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-charcoal">Tag (new, bestseller, sale, standard)</label>
+                    <select id="form-tag" class="w-full bg-white px-3 py-2 text-sm rounded-xl border border-rosePrimary/30 focus:outline-none focus:border-roseDeep">
+                        <option value="standard">Standard</option>
+                        <option value="new">New Arrival</option>
+                        <option value="bestseller">Best Seller</option>
+                        <option value="sale">Sale</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-roseDeep text-white font-medium rounded-xl hover:bg-charcoal transition-colors text-sm uppercase">Save Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-charcoal text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300">
+        <i data-lucide="check-circle" class="w-5 h-5 text-rosePrimary"></i>
+        <span id="toast-msg" class="text-sm font-medium">Notification message</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-white pt-16 pb-12 border-t border-rosePrimary/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-white/10">
+            <div class="space-y-4">
+                <span class="font-serif text-2xl font-bold tracking-wider">PK FASHION</span>
+                <p class="text-white/70 text-sm leading-relaxed">Ready-to-wear fashion celebrating confidence, elegance, and modern individuality across Nigeria and beyond.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-roseDeep transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-roseDeep transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-roseDeep transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-serif font-bold text-lg text-rosePrimary">Quick Links</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" onclick="switchView('shop')" class="hover:text-rosePrimary transition-colors">Shop All</a></li>
+                    <li><a href="#" onclick="filterByTag('new')" class="hover:text-rosePrimary transition-colors">New Arrivals</a></li>
+                    <li><a href="#" onclick="filterByTag('bestseller')" class="hover:text-rosePrimary transition-colors">Best Sellers</a></li>
+                    <li><a href="#" onclick="filterByTag('sale')" class="hover:text-rosePrimary transition-colors">Sales & Offers</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-serif font-bold text-lg text-rosePrimary">Customer Care</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" onclick="openSizeGuide()" class="hover:text-rosePrimary transition-colors">Size Guide</a></li>
+                    <li><a href="#" onclick="showToast('Delivery within Lagos: 2-3 days. Nationwide delivery available.')" class="hover:text-rosePrimary transition-colors">Shipping & Delivery</a></li>
+                    <li><a href="#" onclick="showToast('Returns accepted within 7 days of delivery for unworn items.')" class="hover:text-rosePrimary transition-colors">Returns Policy</a></li>
+                    <li><a href="#" onclick="switchView('contact')" class="hover:text-rosePrimary transition-colors">Contact Concierge</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-serif font-bold text-lg text-rosePrimary">Newsletter</h4>
+                <p class="text-sm text-white/70">Subscribe for early access to new collections and exclusive offers.</p>
+                <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                    <input type="email" required placeholder="Enter your email" class="w-full bg-white/10 px-4 py-3 text-sm rounded-xl border border-white/20 focus:outline-none focus:border-rosePrimary text-white placeholder-white/40">
+                    <button type="submit" class="w-full py-3 bg-roseDeep text-white font-medium rounded-xl hover:bg-rosePrimary hover:text-charcoal transition-colors text-xs uppercase tracking-wider">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50">
+            <p>&copy; 2026 PK Fashion. All Rights Reserved.</p>
+            <div class="flex space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- INITIAL APP STATE & LOCALSTORAGE ---
+        const DEFAULT_PRODUCTS = [
+            { id: 'prod-1', name: 'The Rose Silk Midi Dress', category: 'Dresses', price: 85000, oldPrice: 100000, image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600', desc: 'Crafted from pure Italian silk in our signature rose pink. Features a flattering bias cut and adjustable straps.', tag: 'new', colors: ['Rose Pink', 'Charcoal Black', 'Ivory White'], sizes: ['XS', 'S', 'M', 'L'] },
+            { id: 'prod-2', name: 'Executive Tailored Blazer Set', category: 'Workwear', price: 145000, oldPrice: null, image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600', desc: 'A sophisticated two-piece suit tailored for the modern executive woman. Impeccable fit and premium crepe fabric.', tag: 'bestseller', colors: ['Blush Pink', 'Charcoal Black'], sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 'prod-3', name: 'Pleated Chiffon Evening Gown', category: 'Occasion Wear', price: 180000, oldPrice: 210000, image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&q=80&w=600', desc: 'Breathtaking floor-length gown with delicate pleating and a graceful silhouette for upscale galas and weddings.', tag: 'sale', colors: ['Rose Deep', 'Champagne'], sizes: ['XS', 'S', 'M', 'L', 'XL'] },
+            { id: 'prod-4', name: 'Chic Satin Wrap Blouse', category: 'Tops & Blouses', price: 48000, oldPrice: null, image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600', desc: 'Versatile wrap blouse with gorgeous sheen. Pairs effortlessly with tailored trousers or denim.', tag: 'new', colors: ['Blush Pink', 'White', 'Charcoal'], sizes: ['XS', 'S', 'M', 'L'] },
+            { id: 'prod-5', name: 'High-Waist Wide Leg Trousers', category: 'Trousers & Jeans', price: 65000, oldPrice: null, image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=600', desc: 'Elongating wide-leg trousers designed for supreme comfort and polished everyday sophistication.', tag: 'bestseller', colors: ['Charcoal Black', 'Cream', 'Rose Pink'], sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 'prod-6', name: 'Embroidered Two-Piece Leisure Set', category: 'Two-Piece Sets', price: 95000, oldPrice: 110000, image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&q=80&w=600', desc: 'Relaxed yet luxurious matching set featuring delicate embroidery along the cuffs and hem.', tag: 'sale', colors: ['Soft Blush', 'Cream'], sizes: ['XS', 'S', 'M', 'L'] },
+            { id: 'prod-7', name: 'Structured Mini Handbag', category: 'Accessories', price: 55000, oldPrice: null, image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600', desc: 'Handcrafted vegan leather mini bag with gold-tone hardware. The ultimate accessory for any outfit.', tag: 'new', colors: ['Rose Pink', 'Charcoal', 'White'], sizes: ['One Size'] },
+            { id: 'prod-8', name: 'Asymmetric Pleated Midi Skirt', category: 'Skirts', price: 58000, oldPrice: null, image: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&q=80&w=600', desc: 'Dynamic pleated midi skirt with an asymmetric hem that moves fluidly with every step.', tag: 'bestseller', colors: ['Rose Deep', 'Charcoal Black'], sizes: ['XS', 'S', 'M', 'L'] }
+        ];
+
+        const CATEGORIES = [
+            { name: 'Dresses', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Tops & Blouses', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Two-Piece Sets', img: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Trousers & Jeans', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Skirts', img: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Casual Wear', img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Workwear', img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Occasion Wear', img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Accessories', img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=400' }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('pk_products')) || DEFAULT_PRODUCTS;
+        let cart = JSON.parse(localStorage.getItem('pk_cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('pk_wishlist')) || [];
+        let orders = JSON.parse(localStorage.getItem('pk_orders')) || [
+            { id: 'PK-9821', customer: 'Amina Bello', email: 'amina@example.com', total: 90000, status: 'Delivered', date: '2026-10-02', items: [{ name: 'The Rose Silk Midi Dress', qty: 1, price: 85000 }] },
+            { id: 'PK-9822', customer: 'Chinyere Okoro', email: 'chinyere@example.com', total: 151000, status: 'Shipped', date: '2026-10-08', items: [{ name: 'Executive Tailored Blazer Set', qty: 1, price: 145000 }] }
+        ];
+        let currentUser = JSON.parse(localStorage.getItem('pk_user')) || null;
+        let activeDiscount = JSON.parse(localStorage.getItem('pk_discount')) || 0; // 0.1 for 10%
+        let selectedSizesFilter = [];
+
+        // Save State
+        function persistState() {
+            localStorage.setItem('pk_products', JSON.stringify(products));
+            localStorage.setItem('pk_cart', JSON.stringify(cart));
+            localStorage.setItem('pk_wishlist', JSON.stringify(wishlist));
+            localStorage.setItem('pk_orders', JSON.stringify(orders));
+            localStorage.setItem('pk_user', JSON.stringify(currentUser));
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            lucide.createIcons();
+            renderCategoriesGrid();
+            renderHomeProducts();
+            renderShopProducts();
+            renderFilterCategories();
+            updateBadges();
+            initAnnouncementRotation();
+        };
+
+        // Announcement Rotation
+        const announcements = [
+            "Welcome to PK Fashion. Discover Your Style & Elegance.",
+            "New Spring Collection 2026 is Now Live.",
+            "Enjoy free delivery on qualifying orders across Nigeria."
+        ];
+        let annIndex = 0;
+        function initAnnouncementRotation() {
+            setInterval(() => {
+                annIndex = (annIndex + 1) % announcements.length;
+                const el = document.getElementById('announcement-text');
+                if (el) {
+                    el.style.opacity = 0;
+                    setTimeout(() => {
+                        el.innerText = announcements[annIndex];
+                        el.style.opacity = 1;
+                    }, 300);
+                }
+            }, 4000);
+        }
+
+        // --- VIEW ROUTING ---
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            if (viewId === 'shop') {
+                applyFilters();
+            }
+            lucide.createIcons();
+        }
+
+        // --- RENDER HOME SECTIONS ---
+        function renderCategoriesGrid() {
+            const grid = document.getElementById('category-grid');
+            if (!grid) return;
+            grid.innerHTML = CATEGORIES.map(cat => `
+                <div onclick="filterByCategory('${cat.name}')" class="group relative rounded-2xl overflow-hidden shadow-sm border border-rosePrimary/20 cursor-pointer aspect-[4/5]">
+                    <img src="${cat.img}" alt="${cat.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent flex items-end p-4">
+                        <span class="text-white font-serif font-bold text-sm tracking-wide group-hover:text-rosePrimary transition-colors">${cat.name}</span>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function renderHomeProducts() {
+            const newGrid = document.getElementById('new-arrivals-grid');
+            const bestGrid = document.getElementById('best-sellers-grid');
+            
+            const newProds = products.filter(p => p.tag === 'new').slice(0, 4);
+            const bestProds = products.filter(p => p.tag === 'bestseller').slice(0, 4);
+
+            if (newGrid) newGrid.innerHTML = newProds.map(p => productCardHTML(p)).join('');
+            if (bestGrid) bestGrid.innerHTML = bestProds.map(p => productCardHTML(p)).join('');
+            lucide.createIcons();
+        }
+
+        function productCardHTML(p) {
+            const isWishlisted = wishlist.includes(p.id);
+            return `
+                <div class="group bg-white rounded-2xl shadow-sm border border-rosePrimary/20 overflow-hidden flex flex-col relative">
+                    <button onclick="toggleWishlist('${p.id}')" class="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full text-charcoal hover:text-roseDeep shadow transition-colors">
+                        <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-roseDeep text-roseDeep' : ''}"></i>
+                    </button>
+                    <div class="relative aspect-[3/4] overflow-hidden bg-rosePrimary/10 cursor-pointer" onclick="openProductDetail('${p.id}')">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        ${p.oldPrice ? '<span class="absolute top-3 left-3 bg-roseDeep text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Sale</span>' : ''}
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow justify-between space-y-3">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-roseDeep font-semibold">${p.category}</span>
+                            <h3 onclick="openProductDetail('${p.id}')" class="font-serif font-bold text-base text-charcoal hover:text-roseDeep cursor-pointer transition-colors line-clamp-1">${p.name}</h3>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="font-bold text-charcoal">₦${p.price.toLocaleString()}</span>
+                                ${p.oldPrice ? `<span class="text-xs text-charcoal/50 line-through">₦${p.oldPrice.toLocaleString()}</span>` : ''}
+                            </div>
+                            <button onclick="openProductDetail('${p.id}')" class="px-3 py-1.5 bg-rosePrimary/20 text-roseDeep text-xs font-semibold rounded-lg hover:bg-roseDeep hover:text-white transition-colors">
+                                Quick View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- SHOP & FILTERING SYSTEM ---
+        let currentCategoryFilter = 'all';
+        let currentTagFilter = 'all';
+        let selectedSizes = [];
+
+        function renderFilterCategories() {
+            const container = document.getElementById('filter-categories');
+            if (!container) return;
+            let html = `<label class="flex items-center space-x-2 text-sm text-charcoal cursor-pointer"><input type="radio" name="cat-filter" checked onclick="filterByCategory('all')" class="accent-roseDeep"><span>All Categories</span></label>`;
+            CATEGORIES.forEach(c => {
+                html += `<label class="flex items-center space-x-2 text-sm text-charcoal cursor-pointer"><input type="radio" name="cat-filter" onclick="filterByCategory('${c.name}')" class="accent-roseDeep"><span>${c.name}</span></label>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function filterByCategory(cat) {
+            currentCategoryFilter = cat;
+            currentTagFilter = 'all';
+            switchView('shop');
+            applyFilters();
+        }
+
+        function filterByTag(tag) {
+            currentTagFilter = tag;
+            currentCategoryFilter = 'all';
+            switchView('shop');
+            applyFilters();
+        }
+
+        function toggleSizeFilter(size) {
+            const idx = selectedSizesFilter.indexOf(size);
+            if (idx > -1) selectedSizesFilter.splice(idx, 1);
+            else selectedSizesFilter.push(size);
+            applyFilters();
+        }
+
+        function resetFilters() {
+            currentCategoryFilter = 'all';
+            currentTagFilter = 'all';
+            selectedSizesFilter = [];
+            const searchInput = document.getElementById('filter-search');
+            if (searchInput) searchInput.value = '';
+            const priceInput = document.getElementById('filter-price');
+            if (priceInput) priceInput.value = 500000;
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchVal = document.getElementById('filter-search')?.value.toLowerCase() || '';
+            const maxPrice = Number(document.getElementById('filter-price')?.value) || 500000;
+            const sortVal = document.getElementById('sort-select')?.value || 'newest';
+
+            document.getElementById('price-output').innerText = `₦${maxPrice.toLocaleString()}`;
+
+            let filtered = products.filter(p => {
+                const matchSearch = p.name.toLowerCase().includes(searchVal) || p.category.toLowerCase().includes(searchVal);
+                const matchCat = currentCategoryFilter === 'all' || p.category === currentCategoryFilter;
+                const matchTag = currentTagFilter === 'all' || p.tag === currentTagFilter;
+                const matchPrice = p.price <= maxPrice;
+                const matchSize = selectedSizesFilter.length === 0 || p.sizes.some(s => selectedSizesFilter.includes(s));
+                return matchSearch && matchCat && matchTag && matchPrice && matchSize;
+            });
+
+            // Sorting
+            if (sortVal === 'price-low') filtered.sort((a, b) => a.price - b.price);
+            else if (sortVal === 'price-high') filtered.sort((a, b) => b.price - a.price);
+            else if (sortVal === 'bestseller') filtered.sort((a, b) => (b.tag === 'bestseller' ? 1 : 0) - (a.tag === 'bestseller' ? 1 : 0));
+
+            const grid = document.getElementById('shop-products-grid');
+            const noResults = document.getElementById('no-results');
+            const countEl = document.getElementById('product-count');
+
+            if (countEl) countEl.innerText = `Showing ${filtered.length} products`;
+
+            if (filtered.length === 0) {
+                if (grid) grid.innerHTML = '';
+                if (noResults) noResults.classList.remove('hidden');
+            } else {
+                if (noResults) noResults.classList.add('hidden');
+                if (grid) grid.innerHTML = filtered.map(p => productCardHTML(p)).join('');
+            }
+            lucide.createIcons();
+        }
+
+        function renderShopProducts() {
+            applyFilters();
+        }
+
+        // --- PRODUCT DETAIL & MODAL ---
+        let currentActiveProduct = null;
+        let modalSelectedColor = '';
+        let modalSelectedSize = '';
+
+        function openProductDetail(prodId) {
+            const p = products.find(item => item.id === prodId);
+            if (!p) return;
+            currentActiveProduct = p;
+            modalSelectedColor = p.colors[0] || 'Rose Pink';
+            modalSelectedSize = p.sizes[0] || 'S';
+
+            document.getElementById('modal-img').src = p.image;
+            document.getElementById('modal-category').innerText = p.category;
+            document.getElementById('modal-title').innerText = p.name;
+            document.getElementById('modal-price').innerText = `₦${p.price.toLocaleString()}`;
+            
+            const oldPriceEl = document.getElementById('modal-old-price');
+            if (p.oldPrice) {
+                oldPriceEl.innerText = `₦${p.oldPrice.toLocaleString()}`;
+                oldPriceEl.classList.remove('hidden');
+            } else {
+                oldPriceEl.classList.add('hidden');
+            }
+
+            document.getElementById('modal-desc').innerText = p.desc;
+
+            // Render Colors
+            document.getElementById('selected-color-name').innerText = modalSelectedColor;
+            const colorsContainer = document.getElementById('modal-colors');
+            colorsContainer.innerHTML = p.colors.map(col => `
+                <button onclick="selectModalColor('${col}')" class="px-3 py-1.5 text-xs rounded-lg border ${modalSelectedColor === col ? 'border-roseDeep bg-rosePrimary/20 font-bold' : 'border-rosePrimary/30'}">${col}</button>
+            `).join('');
+
+            // Render Sizes
+            const sizesContainer = document.getElementById('modal-sizes');
+            sizesContainer.innerHTML = p.sizes.map(sz => `
+                <button onclick="selectModalSize('${sz}')" class="px-4 py-2 text-xs font-semibold rounded-lg border ${modalSelectedSize === sz ? 'border-roseDeep bg-roseDeep text-white' : 'border-rosePrimary/40 text-charcoal'}">${sz}</button>
+            `).join('');
+
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function selectModalColor(col) {
+            modalSelectedColor = col;
+            document.getElementById('selected-color-name').innerText = col;
+            openProductDetail(currentActiveProduct.id);
+        }
+
+        function selectModalSize(sz) {
+            modalSelectedSize = sz;
+            openProductDetail(currentActiveProduct.id);
+        }
+
+        function closeProductDetail() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // --- SIZE GUIDE MODAL ---
+        function openSizeGuide() {
+            document.getElementById('size-guide-modal').classList.remove('hidden');
+            document.getElementById('size-guide-modal').classList.add('flex');
+        }
+        function closeSizeGuide() {
+            document.getElementById('size-guide-modal').classList.add('hidden');
+            document.getElementById('size-guide-modal').classList.remove('flex');
+        }
+
+        // --- CART SYSTEM ---
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            const panel = document.getElementById('cart-drawer-panel');
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                setTimeout(() => {
+                    drawer.classList.remove('opacity-0');
+                    panel.classList.remove('translate-x-full');
+                }, 10);
+                renderCartItems();
+            } else {
+                drawer.classList.add('opacity-0');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => drawer.classList.add('hidden'), 300);
+            }
+        }
+
+        function addToCartFromModal() {
+            if (!currentActiveProduct) return;
+            const cartItem = {
+                cartId: `${currentActiveProduct.id}-${modalSelectedColor}-${modalSelectedSize}`,
+                id: currentActiveProduct.id,
+                name: currentActiveProduct.name,
+                price: currentActiveProduct.price,
+                image: currentActiveProduct.image,
+                color: modalSelectedColor,
+                size: modalSelectedSize,
+                qty: 1
+            };
+
+            const existing = cart.find(i => i.cartId === cartItem.cartId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(cartItem);
+            }
+
+            persistState();
+            updateBadges();
+            closeProductDetail();
+            showToast(`Added ${currentActiveProduct.name} to your shopping bag.`);
+            toggleCartDrawer();
+        }
+
+        function updateCartQty(cartId, delta) {
+            const item = cart.find(i => i.cartId === cartId);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.cartId !== cartId);
+            }
+            persistState();
+            updateBadges();
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 space-y-3"><i data-lucide="shopping-bag" class="w-10 h-10 mx-auto text-roseDeep"></i><p class="font-serif text-lg font-bold">Your bag is empty</p><p class="text-xs text-charcoal/60">Discover our ready-to-wear pieces and add them to your bag.</p></div>`;
+                document.getElementById('cart-subtotal').innerText = '₦0';
+                document.getElementById('cart-total').innerText = '₦5,000';
+                lucide.createIcons();
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center space-x-4 pt-4">
+                    <img src="${item.image}" alt="${item.name}" class="w-20 h-24 object-cover rounded-xl border border-rosePrimary/20">
+                    <div class="flex-grow space-y-1">
+                        <h4 class="font-serif font-bold text-sm line-clamp-1">${item.name}</h4>
+                        <p class="text-xs text-charcoal/60">${item.color} | Size: ${item.size}</p>
+                        <p class="font-bold text-sm text-charcoal">₦${item.price.toLocaleString()}</p>
+                        <div class="flex items-center space-x-3 pt-1">
+                            <button onclick="updateCartQty('${item.cartId}', -1)" class="w-6 h-6 rounded bg-rosePrimary/20 text-roseDeep flex items-center justify-center font-bold">-</button>
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button onclick="updateCartQty('${item.cartId}', 1)" class="w-6 h-6 rounded bg-rosePrimary/20 text-roseDeep flex items-center justify-center font-bold">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            document.getElementById('cart-subtotal').innerText = `₦${subtotal.toLocaleString()}`;
+
+            let discount = subtotal * activeDiscount;
+            const discountRow = document.getElementById('cart-discount-row');
+            if (activeDiscount > 0) {
+                discountRow.classList.remove('hidden');
+                document.getElementById('cart-discount').innerText = `-₦${discount.toLocaleString()}`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+
+            const shipping = 5000;
+            const total = subtotal - discount + shipping;
+            document.getElementById('cart-total').innerText = `₦${total.toLocaleString()}`;
+            lucide.createIcons();
+        }
+
+        function applyPromoCode() {
+            const code = document.getElementById('promo-code-input').value.trim().toUpperCase();
+            const msg = document.getElementById('promo-msg');
+            msg.classList.remove('hidden');
+            if (code === 'PKFASHION10') {
+                activeDiscount = 0.1;
+                localStorage.setItem('pk_discount', JSON.stringify(activeDiscount));
+                msg.innerText = 'Promo code applied: 10% OFF!';
+                renderCartItems();
+            } else {
+                msg.innerText = 'Invalid promo code. Try PKFASHION10';
+            }
+        }
+
+        // --- WISHLIST SYSTEM ---
+        function toggleWishlistDrawer() {
+            const drawer = document.getElementById('wishlist-drawer');
+            const panel = document.getElementById('wishlist-drawer-panel');
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                setTimeout(() => {
+                    drawer.classList.remove('opacity-0');
+                    panel.classList.remove('translate-x-full');
+                }, 10);
+                renderWishlistItems();
+            } else {
+                drawer.classList.add('opacity-0');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => drawer.classList.add('hidden'), 300);
+            }
+        }
+
+        function toggleWishlist(prodId) {
+            const idx = wishlist.indexOf(prodId);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                showToast('Removed item from wishlist.');
+            } else {
+                wishlist.push(prodId);
+                showToast('Added item to your wishlist.');
+            }
+            persistState();
+            updateBadges();
+            renderHomeProducts();
+            if (document.getElementById('view-shop').classList.contains('hidden') === false) {
+                applyFilters();
+            }
+        }
+
+        function renderWishlistItems() {
+            const container = document.getElementById('wishlist-items-container');
+            if (!container) return;
+
+            const savedProds = products.filter(p => wishlist.includes(p.id));
+            if (savedProds.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 space-y-3"><i data-lucide="heart" class="w-10 h-10 mx-auto text-roseDeep"></i><p class="font-serif text-lg font-bold">Your wishlist is empty</p><p class="text-xs text-charcoal/60">Save your favorite ready-to-wear pieces here.</p></div>`;
+                lucide.createIcons();
+                return;
+            }
+
+            container.innerHTML = savedProds.map(p => `
+                <div class="flex items-center space-x-4 p-3 bg-white rounded-2xl border border-rosePrimary/20">
+                    <img src="${p.image}" alt="${p.name}" class="w-16 h-20 object-cover rounded-xl">
+                    <div class="flex-grow space-y-1">
+                        <h4 class="font-serif font-bold text-sm">${p.name}</h4>
+                        <p class="font-bold text-xs text-charcoal">₦${p.price.toLocaleString()}</p>
+                        <div class="flex space-x-2 pt-1">
+                            <button onclick="openProductDetail('${p.id}'); toggleWishlistDrawer();" class="text-xs text-roseDeep font-semibold underline">View</button>
+                            <button onclick="toggleWishlist('${p.id}'); renderWishlistItems();" class="text-xs text-charcoal/60 hover:text-charcoal">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function updateBadges() {
+            const cartBadge = document.getElementById('cart-badge');
+            const wishlistBadge = document.getElementById('wishlist-badge');
+            
+            const totalCartItems = cart.reduce((acc, i) => acc + i.qty, 0);
+            if (cartBadge) {
+                cartBadge.innerText = totalCartItems;
+            }
+            if (wishlistBadge) {
+                if (wishlist.length > 0) {
+                    wishlistBadge.innerText = wishlist.length;
+                    wishlistBadge.classList.remove('hidden');
+                } else {
+                    wishlistBadge.classList.add('hidden');
+                }
+            }
+        }
+
+        // --- CHECKOUT & PAYSTACK PAYMENT SIMULATION ---
+        function openCheckout() {
+            if (cart.length === 0) {
+                showToast('Your shopping bag is empty.');
+                return;
+            }
+            toggleCartDrawer();
+            const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            const discount = subtotal * activeDiscount;
+            const shipping = 4000;
+            const total = subtotal - discount + shipping;
+
+            document.getElementById('checkout-subtotal').innerText = `₦${subtotal.toLocaleString()}`;
+            document.getElementById('checkout-final-total').innerText = `₦${total.toLocaleString()}`;
+
+            if (currentUser) {
+                document.getElementById('checkout-name').value = currentUser.name || '';
+                document.getElementById('checkout-email').value = currentUser.email || '';
+            }
+
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function updateShippingFee() {
+            const city = document.getElementById('checkout-city').value;
+            let fee = 4000;
+            if (city === 'Abuja' || city === 'Port Harcourt') fee = 6000;
+            else if (city === 'Other Nigeria') fee = 8000;
+            else if (city === 'International') fee = 35000;
+
+            document.getElementById('checkout-shipping').innerText = `₦${fee.toLocaleString()}`;
+            const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            const discount = subtotal * activeDiscount;
+            const total = subtotal - discount + fee;
+            document.getElementById('checkout-final-total').innerText = `₦${total.toLocaleString()}`;
+        }
+
+        function processPayment(event) {
+            event.preventDefault();
+            const name = document.getElementById('checkout-name').value;
+            const email = document.getElementById('checkout-email').value;
+            const address = document.getElementById('checkout-address').value;
+            const city = document.getElementById('checkout-city').value;
+
+            const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            const discount = subtotal * activeDiscount;
+            let shipping = 4000;
+            if (city === 'Abuja' || city === 'Port Harcourt') shipping = 6000;
+            else if (city === 'Other Nigeria') shipping = 8000;
+            else if (city === 'International') shipping = 35000;
+            const total = subtotal - discount + shipping;
+
+            const newOrder = {
+                id: `PK-${Math.floor(1000 + Math.random() * 9000)}`,
+                customer: name,
+                email: email,
+                address: `${address}, ${city}`,
+                total: total,
+                status: 'Payment Confirmed',
+                date: new Date().toISOString().split('T')[0],
+                items: [...cart]
+            };
+
+            orders.unshift(newOrder);
+            cart = [];
+            persistState();
+            updateBadges();
+            closeCheckout();
+
+            showToast(`Order ${newOrder.id} successfully placed! Payment verified.`);
+            if (currentUser) {
+                renderCustomerOrders();
+            }
+        }
+
+        // --- CUSTOMER ACCOUNT & AUTH ---
+        function openAccountModal() {
+            const modal = document.getElementById('account-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if (currentUser) {
+                document.getElementById('account-auth-container').classList.add('hidden');
+                document.getElementById('account-profile-container').classList.remove('hidden');
+                document.getElementById('profile-name').innerText = currentUser.name;
+                document.getElementById('profile-email').innerText = currentUser.email;
+                renderCustomerOrders();
+            } else {
+                document.getElementById('account-auth-container').classList.remove('hidden');
+                document.getElementById('account-profile-container').classList.add('hidden');
+            }
+            lucide.createIcons();
+        }
+
+        function closeAccountModal() {
+            const modal = document.getElementById('account-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function switchAuthTab(tab) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const loginBtn = document.getElementById('tab-login-btn');
+            const signupBtn = document.getElementById('tab-signup-btn');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                loginBtn.className = 'flex-1 pb-3 text-sm font-bold text-roseDeep border-b-2 border-roseDeep';
+                signupBtn.className = 'flex-1 pb-3 text-sm font-semibold text-charcoal/60';
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                signupBtn.className = 'flex-1 pb-3 text-sm font-bold text-roseDeep border-b-2 border-roseDeep';
+                loginBtn.className = 'flex-1 pb-3 text-sm font-semibold text-charcoal/60';
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            currentUser = { name: email.split('@')[0], email: email };
+            persistState();
+            showToast('Successfully signed in.');
+            openAccountModal();
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            currentUser = { name: name, email: email };
+            persistState();
+            showToast('Account registered successfully.');
+            openAccountModal();
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            persistState();
+            showToast('Signed out successfully.');
+            openAccountModal();
+        }
+
+        function renderCustomerOrders() {
+            const container = document.getElementById('customer-orders-list');
+            if (!container) return;
+
+            const myOrders = orders.filter(o => !currentUser || o.email === currentUser.email);
+            if (myOrders.length === 0) {
+                container.innerHTML = `<p class="text-xs text-charcoal/60">No order history found.</p>`;
+                return;
+            }
+
+            container.innerHTML = myOrders.map(o => `
+                <div class="p-4 bg-white rounded-2xl border border-rosePrimary/20 space-y-2 text-sm">
+                    <div class="flex justify-between font-bold">
+                        <span>Order #${o.id}</span>
+                        <span class="text-roseDeep">₦${o.total.toLocaleString()}</span>
+                    </div>
+                    <p class="text-xs text-charcoal/70">Date: ${o.date} | Status: <span class="font-semibold text-emerald-600">${o.status}</span></p>
+                </div>
+            `).join('');
+        }
+
+        // --- PROTECTED ADMIN DASHBOARD ---
+        function toggleAdminDashboard() {
+            const modal = document.getElementById('admin-dashboard-modal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                renderAdminSales();
+                renderAdminProducts();
+                renderAdminOrders();
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+            lucide.createIcons();
+        }
+
+        function switchAdminTab(tab) {
+            ['sales', 'products', 'orders', 'promos'].forEach(t => {
+                document.getElementById(`admin-view-${t}`).classList.add('hidden');
+                document.getElementById(`admin-tab-${t}`).className = 'px-6 py-3.5 text-sm font-semibold text-charcoal/70 hover:text-charcoal whitespace-nowrap';
+            });
+            document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
+            document.getElementById(`admin-tab-${tab}`).className = 'px-6 py-3.5 text-sm font-bold text-roseDeep border-b-2 border-roseDeep whitespace-nowrap';
+            lucide.createIcons();
+        }
+
+        function renderAdminSales() {
+            const totalRev = orders.reduce((acc, o) => acc + o.total, 0);
+            document.getElementById('admin-total-revenue').innerText = `₦${totalRev.toLocaleString()}`;
+            document.getElementById('admin-total-orders').innerText = orders.length;
+            document.getElementById('admin-total-products').innerText = products.length;
+            document.getElementById('admin-avg-order').innerText = orders.length ? `₦${Math.round(totalRev / orders.length).toLocaleString()}` : '₦0';
+
+            const tbody = document.getElementById('admin-recent-transactions');
+            tbody.innerHTML = orders.slice(0, 5).map(o => `
+                <tr>
+                    <td class="p-3 font-medium">#${o.id}</td>
+                    <td class="p-3">${o.customer}</td>
+                    <td class="p-3">₦${o.total.toLocaleString()}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full">${o.status}</span></td>
+                    <td class="p-3 text-charcoal/60">${o.date}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminProducts() {
+            const tbody = document.getElementById('admin-products-table');
+            tbody.innerHTML = products.map(p => `
+                <tr>
+                    <td class="p-4"><img src="${p.image}" class="w-12 h-14 object-cover rounded-lg"></td>
+                    <td class="p-4 font-medium">${p.name}</td>
+                    <td class="p-4 text-charcoal/70">${p.category}</td>
+                    <td class="p-4 font-bold">₦${p.price.toLocaleString()}</td>
+                    <td class="p-4"><span class="px-2 py-1 bg-rosePrimary/20 text-roseDeep text-xs font-semibold rounded-md">${p.tag}</span></td>
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="editProduct('${p.id}')" class="text-xs text-roseDeep font-semibold hover:underline">Edit</button>
+                        <button onclick="deleteProduct('${p.id}')" class="text-xs text-red-600 font-semibold hover:underline">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminOrders() {
+            const tbody = document.getElementById('admin-orders-table');
+            tbody.innerHTML = orders.map(o => `
+                <tr>
+                    <td class="p-4 font-medium">#${o.id}</td>
+                    <td class="p-4">${o.customer}</td>
+                    <td class="p-4">${o.items.length} items</td>
+                    <td class="p-4 font-bold">₦${o.total.toLocaleString()}</td>
+                    <td class="p-4"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full">${o.status}</span></td>
+                    <td class="p-4 text-right">
+                        <select onchange="updateOrderStatus('${o.id}', this.value)" class="text-xs bg-cream px-2 py-1 rounded border border-rosePrimary/30">
+                            <option value="Payment Confirmed" ${o.status === 'Payment Confirmed' ? 'selected' : ''}>Payment Confirmed</option>
+                            <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>Processing</option>
+                            <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                            <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                        </select>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateOrderStatus(orderId, newStatus) {
+            const ord = orders.find(o => o.id === orderId);
+            if (ord) {
+                ord.status = newStatus;
+                persistState();
+                showToast(`Order #${orderId} status updated to ${newStatus}.`);
+                renderAdminSales();
+                renderAdminOrders();
+            }
+        }
+
+        function openAddProductModal() {
+            document.getElementById('product-form-title').innerText = 'Add New Product';
+            document.getElementById('edit-product-id').value = '';
+            document.getElementById('form-name').value = '';
+            document.getElementById('form-price').value = '';
+            document.getElementById('form-image').value = '';
+            document.getElementById('form-desc').value = '';
+            document.getElementById('product-form-modal').classList.remove('hidden');
+            document.getElementById('product-form-modal').classList.add('flex');
+        }
+
+        function closeAddProductModal() {
+            document.getElementById('product-form-modal').classList.add('hidden');
+            document.getElementById('product-form-modal').classList.remove('flex');
+        }
+
+        function editProduct(prodId) {
+            const p = products.find(item => item.id === prodId);
+            if (!p) return;
+            document.getElementById('product-form-title').innerText = 'Edit Product';
+            document.getElementById('edit-product-id').value = p.id;
+            document.getElementById('form-name').value = p.name;
+            document.getElementById('form-category').value = p.category;
+            document.getElementById('form-price').value = p.price;
+            document.getElementById('form-image').value = p.image;
+            document.getElementById('form-desc').value = p.desc;
+            document.getElementById('form-tag').value = p.tag;
+
+            document.getElementById('product-form-modal').classList.remove('hidden');
+            document.getElementById('product-form-modal').classList.add('flex');
+        }
+
+        function saveProduct(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-product-id').value;
+            const name = document.getElementById('form-name').value;
+            const category = document.getElementById('form-category').value;
+            const price = Number(document.getElementById('form-price').value);
+            const image = document.getElementById('form-image').value;
+            const desc = document.getElementById('form-desc').value;
+            const tag = document.getElementById('form-tag').value;
+
+            if (id) {
+                const p = products.find(item => item.id === id);
+                if (p) {
+                    p.name = name;
+                    p.category = category;
+                    p.price = price;
+                    p.image = image;
+                    p.desc = desc;
+                    p.tag = tag;
+                }
+                showToast('Product updated successfully.');
+            } else {
+                const newProd = {
+                    id: `prod-${Date.now()}`,
+                    name, category, price, oldPrice: null, image, desc, tag,
+                    colors: ['Rose Pink', 'Charcoal'], sizes: ['XS', 'S', 'M', 'L']
+                };
+                products.unshift(newProd);
+                showToast('New product added successfully.');
+            }
+
+            persistState();
+            closeAddProductModal();
+            renderHomeProducts();
+            renderShopProducts();
+            renderAdminProducts();
+        }
+
+        function deleteProduct(prodId) {
+            products = products.filter(p => p.id !== prodId);
+            persistState();
+            showToast('Product deleted.');
+            renderHomeProducts();
+            renderShopProducts();
+            renderAdminProducts();
+        }
+
+        // --- CONTACT & NEWSLETTER & TOAST ---
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('Thank you! Your message has been sent to our concierge.');
+            e.target.reset();
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            showToast('Successfully subscribed to PK Fashion updates.');
+            e.target.reset();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const panel = document.getElementById('mobile-menu-panel');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                setTimeout(() => {
+                    menu.classList.remove('opacity-0');
+                    panel.classList.remove('-translate-x-full');
+                }, 10);
+            } else {
+                menu.classList.add('opacity-0');
+                panel.classList.add('-translate-x-full');
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>

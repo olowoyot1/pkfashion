@@ -1,0 +1,12 @@
+{
+  "name": "pk-fashion-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PK Fashion ready-to-wear storefront prepared for Vercel static deployment",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "build": "node scripts/check-build.js"
+  },
+  "engines": { "node": ">=20" }
+}
