@@ -164,7 +164,7 @@
                     </div>
                     <div class="relative flex justify-center">
                         <div class="relative w-full max-w-md lg:max-w-lg aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" alt="High Fashion Editorial" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                            <img src="https://images.pexels.com/photos/32093800/pexels-photo-32093800/free-photo-of-african-women-in-traditional-ankara-dresses.jpeg?auto=compress&cs=tinysrgb&w=900" alt="High Fashion Editorial" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent flex items-end p-8">
                                 <div class="text-white">
                                     <p class="text-xs uppercase tracking-widest text-rosePrimary font-semibold">Featured Look</p>
@@ -220,7 +220,7 @@
                         </button>
                     </div>
                     <div class="w-full lg:w-1/2 flex justify-center">
-                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600" alt="Special Offer" class="rounded-2xl shadow-xl max-h-80 object-cover w-full max-w-md">
+                        <img src="https://images.pexels.com/photos/3869639/pexels-photo-3869639.jpeg?auto=compress&cs=tinysrgb&w=900" alt="African women in vibrant attire collaborating in an office" class="rounded-2xl shadow-xl max-h-80 object-cover w-full max-w-md">
                     </div>
                 </div>
             </section>
@@ -790,25 +790,37 @@
     <script>
         // --- INITIAL APP STATE & LOCALSTORAGE ---
         const DEFAULT_PRODUCTS = [
-            { id: 'prod-1', name: 'Executive Ankara Blazer & Trousers', category: 'English-Style Workwear', price: 145000, oldPrice: null, image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800', desc: 'A polished, modern office look pairing tailored Western silhouettes with vibrant Ankara accents.', tag: 'bestseller' },
-            { id: 'prod-2', name: 'Classic Corporate Midi Dress', category: 'English-Style Workwear', price: 98000, oldPrice: 115000, image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=800', desc: 'A refined, comfortable work dress with clean lines for meetings, presentations and everyday office wear.', tag: 'new' },
-            { id: 'prod-3', name: 'Ankara Peplum Skirt Suit', category: 'English-Style Workwear', price: 125000, oldPrice: null, image: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&q=80&w=800', desc: 'A feminine peplum jacket and fitted skirt set, tailored for a confident professional finish.', tag: 'bestseller' },
-            { id: 'prod-4', name: 'Adire Office Shirt & Trousers', category: 'English-Style Workwear', price: 89000, oldPrice: null, image: 'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=800', desc: 'Contemporary separates styled with the expressive character of Nigerian Adire textile.', tag: 'new' },
-            { id: 'prod-5', name: 'Modern Ankara Boubou Set', category: 'Native Workwear', price: 110000, oldPrice: null, image: 'https://images.unsplash.com/photo-153910448?auto=format&fit=crop&q=80&w=800', desc: 'An elegant, easy-moving native-inspired set designed for a stylish and comfortable workday.', tag: 'new' },
-            { id: 'prod-6', name: 'Adire Two-Piece Native Set', category: 'Native Workwear', price: 105000, oldPrice: 120000, image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=800', desc: 'A coordinated two-piece outfit celebrating rich indigo-inspired prints and contemporary tailoring.', tag: 'bestseller' },
-            { id: 'prod-7', name: 'Ankara Pencil Skirt & Blouse', category: 'Native Workwear', price: 92000, oldPrice: null, image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=800', desc: 'A versatile coordinated look blending a tailored office silhouette with African-inspired print.', tag: 'sale' },
-            { id: 'prod-8', name: 'Yoruba-Inspired Boubou Dress', category: 'Native Workwear', price: 135000, oldPrice: null, image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800', desc: 'A graceful, modern native-style dress for office days, client visits and smart occasions.', tag: 'new' }
+            { id: 'prod-1', name: 'Executive Ankara Blazer & Trousers', category: 'English-Style Workwear', price: 145000, oldPrice: null, image: 'https://images.pexels.com/photos/3869639/pexels-photo-3869639.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'A polished, modern office look pairing tailored Western silhouettes with vibrant Ankara accents.', tag: 'bestseller' },
+            { id: 'prod-2', name: 'Classic Corporate Midi Dress', category: 'English-Style Workwear', price: 98000, oldPrice: 115000, image: 'https://images.pexels.com/photos/37550056/pexels-photo-37550056/free-photo-of-elegant-african-woman-in-traditional-ankara-attire.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'A refined, comfortable work dress with clean lines for meetings, presentations and everyday office wear.', tag: 'new' },
+            { id: 'prod-3', name: 'Ankara Peplum Skirt Suit', category: 'English-Style Workwear', price: 125000, oldPrice: null, image: 'https://images.pexels.com/photos/36456207/pexels-photo-36456207/free-photo-of-fashionable-woman-in-colorful-ankara-outfit-outdoors.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'A feminine peplum jacket and fitted skirt set, tailored for a confident professional finish.', tag: 'bestseller' },
+            { id: 'prod-4', name: 'Adire Office Shirt & Trousers', category: 'English-Style Workwear', price: 89000, oldPrice: null, image: 'https://images.pexels.com/photos/3869639/pexels-photo-3869639.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'Contemporary separates styled with the expressive character of Nigerian Adire textile.', tag: 'new' },
+            { id: 'prod-5', name: 'Modern Ankara Boubou Set', category: 'Native Workwear', price: 110000, oldPrice: null, image: 'https://images.pexels.com/photos/32093800/pexels-photo-32093800/free-photo-of-african-women-in-traditional-ankara-dresses.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'An elegant, easy-moving native-inspired set designed for a stylish and comfortable workday.', tag: 'new' },
+            { id: 'prod-6', name: 'Adire Two-Piece Native Set', category: 'Native Workwear', price: 105000, oldPrice: 120000, image: 'https://images.pexels.com/photos/37550056/pexels-photo-37550056/free-photo-of-elegant-african-woman-in-traditional-ankara-attire.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'A coordinated two-piece outfit celebrating rich indigo-inspired prints and contemporary tailoring.', tag: 'bestseller' },
+            { id: 'prod-7', name: 'Ankara Pencil Skirt & Blouse', category: 'Native Workwear', price: 92000, oldPrice: null, image: 'https://images.pexels.com/photos/36456207/pexels-photo-36456207/free-photo-of-fashionable-woman-in-colorful-ankara-outfit-outdoors.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'A versatile coordinated look blending a tailored office silhouette with African-inspired print.', tag: 'sale' },
+            { id: 'prod-8', name: 'Yoruba-Inspired Boubou Dress', category: 'Native Workwear', price: 135000, oldPrice: null, image: 'https://images.pexels.com/photos/32093800/pexels-photo-32093800/free-photo-of-african-women-in-traditional-ankara-dresses.jpeg?auto=compress&cs=tinysrgb&w=900', desc: 'A graceful, modern native-style dress for office days, client visits and smart occasions.', tag: 'new' }
         ];
 
         const CATEGORIES = [
-            { name: 'English-Style Workwear', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Native Workwear', img: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=400' }
+            { name: 'English-Style Workwear', img: 'https://images.pexels.com/photos/3869639/pexels-photo-3869639.jpeg?auto=compress&cs=tinysrgb&w=900' },
+            { name: 'Native Workwear', img: 'https://images.pexels.com/photos/32093800/pexels-photo-32093800/free-photo-of-african-women-in-traditional-ankara-dresses.jpeg?auto=compress&cs=tinysrgb&w=900' }
         ];
 
         const savedProducts = JSON.parse(localStorage.getItem('pk_products') || 'null');
         const hasLegacySampleProducts = Array.isArray(savedProducts) && savedProducts.some(p => /Rose Silk Midi Dress|Structured Mini Handbag|Pleated Chiffon Evening Gown/i.test(p.name || ''));
         let products = savedProducts && !hasLegacySampleProducts ? savedProducts : DEFAULT_PRODUCTS;
-        if (hasLegacySampleProducts || !savedProducts) localStorage.setItem('pk_products', JSON.stringify(DEFAULT_PRODUCTS));
+// One-time image refresh for the original sample products already saved in visitors' browsers.
+const sampleImageIds = new Set(['prod-1','prod-2','prod-3','prod-4','prod-5','prod-6','prod-7','prod-8']);
+if (Array.isArray(products)) {
+    products = products.map(product => {
+        const refreshed = DEFAULT_PRODUCTS.find(item => item.id === product.id);
+        if (refreshed && sampleImageIds.has(product.id) && /images\\.unsplash\\.com\\/photo-/.test(product.image || '')) {
+            return { ...product, image: refreshed.image };
+        }
+        return product;
+    });
+    localStorage.setItem('pk_products', JSON.stringify(products));
+}
+if (hasLegacySampleProducts || !savedProducts) localStorage.setItem('pk_products', JSON.stringify(DEFAULT_PRODUCTS));
         let cart = JSON.parse(localStorage.getItem('pk_cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('pk_wishlist')) || [];
         let orders = JSON.parse(localStorage.getItem('pk_orders')) || [
