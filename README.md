@@ -36,3 +36,16 @@ Requires Node.js 20 or later:
 npm run build
 ```
 The build check verifies that the public storefront contains no admin dashboard markup and copies the storefront and admin page to `public/`. Vercel serves the API handlers from `api/admin/`.
+
+
+## Shared product catalogue and cloud image uploads
+
+This feature uses Supabase for cross-device product catalogue sync and persistent product images.
+
+1. Create a Supabase project.
+2. Run `supabase-setup.sql` in its SQL Editor.
+3. In Vercel Project Settings → Environment Variables, set `SUPABASE_URL` to your project URL and `SUPABASE_SERVICE_ROLE_KEY` to the project's service-role key. Keep that key server-side only; never add it to browser JavaScript.
+4. Redeploy the Vercel project.
+5. Sign in at `/admin/`. The portal initializes the shared catalogue and saves product photos to the public `product-images` bucket. The storefront fetches the shared catalogue when it loads.
+
+Until the Supabase variables are configured and deployment completes, the storefront uses default/local products and cloud uploads will show a configuration error. Orders, customer accounts and checkout remain demo/local flows.
