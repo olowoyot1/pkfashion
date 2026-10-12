@@ -1,42 +1,38 @@
-# PK Fashion — Vercel / GitHub Starter
+# PK Fashion — Vercel storefront
 
-A Vercel-ready static deployment package for the supplied PK Fashion rose-pink ready-to-wear storefront.
+PK Fashion is an African women's ready-to-wear storefront focused on English-style corporate workwear and contemporary Nigerian native-inspired workwear.
 
-## Included
+## Deploy
 
-- `index.html` — complete supplied storefront UI and client-side interactions
-- `vercel.json` — Vercel configuration and baseline response security headers
-- `package.json` — local preview and build-check commands
-- `scripts/check-build.js` — verifies that the storefront file and key sections exist
-- `.env.example` — notes for future server-side payment integration
+1. Import `olowoyot1/pkfashion` into Vercel.
+2. Use the `main` branch, build command `npm run build`, and output directory `public`.
+3. In Vercel → Project Settings → Environment Variables, set the following for Production (and Preview only if needed):
+   - `ADMIN_USERNAME` — set to `kike` if that is the intended admin username.
+   - `ADMIN_PASSWORD` — set the intended password here. Use a long, unique password and do not put it in source code.
+   - `ADMIN_SESSION_SECRET` — a random secret of at least 32 characters.
+   - Optional `ADMIN_ALLOWED_ORIGIN` — the exact production origin, e.g. `https://your-domain.example`.
+4. Redeploy after saving environment variables.
+5. Open `/admin/` to sign in. The admin session uses an HttpOnly, Secure, SameSite=Strict cookie and expires after eight hours.
 
-## Deploy to GitHub and Vercel
-
-1. Create a new GitHub repository named `pk-fashion-store`.
-2. Extract this ZIP and upload/commit all files at the repository root (so `index.html` and `vercel.json` are at the root).
-3. In Vercel, choose **Add New → Project**, import the GitHub repository, and deploy.
-4. Framework preset: **Other**. Build command: `npm run build`. Output directory: `.`. Install command may be left blank or set to `npm install`.
-5. Each push to the connected production branch will trigger a new deployment.
-
-## Local preview
-
-Requires Node.js 20 or later.
-
+Generate a session secret with Node.js:
 ```bash
-npm run build
-npx serve .
+node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
 ```
 
-Open the local URL printed by `serve`.
+`.env.example` documents variable names only; never commit real credentials. If authentication variables are missing, login is intentionally disabled.
 
-## Important production limitations
+## Admin portal and current limitations
 
-This package preserves the supplied HTML project. It is a **front-end/demo storefront**, not yet a secure full-stack commerce system:
+- Public admin links and dashboard markup have been removed from the customer storefront.
+- Admin login is validated by Vercel serverless functions. The password and session signing secret are read only from Vercel environment variables.
+- The portal provides product and demo-order management against the browser's `localStorage`. This is only shared with the storefront in the same browser and device. It is **not** a multi-user database, is not backed up, and is not suitable as the source of truth for real orders or inventory.
+- Customer login, checkout and payment are still demo/front-end flows. No real payment is verified and order state is not persisted centrally.
+- Before live commerce, connect a persistent database (such as Neon Postgres), authenticated server-side CRUD APIs for products and orders, and a payment provider with webhook/signature verification. Do not fulfill orders based on a browser success message.
 
-- Products, cart, wishlist, demo orders and customer state use browser `localStorage`; they are not shared across devices or reliably backed up.
-- The checkout handler in the supplied HTML creates a demo order and displays a payment-success message. It does **not** contact Paystack or Flutterwave and does not verify a real payment. Do not fulfill orders based on that demo status.
-- The admin dashboard in the supplied HTML is client-side UI and is **not protected by server-side authentication/authorization**. Do not expose it as a real admin system or store sensitive data there.
-- The contact form is client-side and needs a server endpoint or form provider to deliver messages.
-- Product image/font/icon assets currently rely on third-party CDNs and image URLs.
+## Local build check
 
-Before taking live orders, add a persistent database (for example, Neon Postgres), server-side customer/admin authentication, server-validated inventory/prices, order APIs, and real payment initialization plus webhook/signature verification. Keep payment secret keys only in Vercel environment variables and never in browser code. For a true multi-user store, this static package is the deployable baseline, not the finished secure commerce backend.
+Requires Node.js 20 or later:
+```bash
+npm run build
+```
+The build check verifies that the public storefront contains no admin dashboard markup and copies the storefront and admin page to `public/`. Vercel serves the API handlers from `api/admin/`.
