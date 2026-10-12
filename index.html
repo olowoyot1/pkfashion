@@ -813,7 +813,7 @@ const sampleImageIds = new Set(['prod-1','prod-2','prod-3','prod-4','prod-5','pr
 if (Array.isArray(products)) {
     products = products.map(product => {
         const refreshed = DEFAULT_PRODUCTS.find(item => item.id === product.id);
-        if (refreshed && sampleImageIds.has(product.id) && /images\\.unsplash\\.com\\/photo-/.test(product.image || '')) {
+        if (refreshed && sampleImageIds.has(product.id) && (product.image || '').includes('images.unsplash.com/photo-')) {
             return { ...product, image: refreshed.image };
         }
         return product;
