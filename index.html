@@ -848,8 +848,11 @@ if (hasLegacySampleProducts || !savedProducts) localStorage.setItem('pk_products
                 if (response.ok) {
                     const cloud = await response.json();
                     if (Array.isArray(cloud.products) && cloud.products.length) {
-                        products = cloud.products;
-                        localStorage.setItem('pk_products', JSON.stringify(products));
+                        const hasLocalCatalogue = Array.isArray(savedProducts) && savedProducts.length > 0;
+                        if (cloud.initialized || !hasLocalCatalogue) {
+                            products = cloud.products;
+                            localStorage.setItem('pk_products', JSON.stringify(products));
+                        }
                     }
                 }
             } catch (error) { console.warn('Using local product catalogue because cloud sync is unavailable.', error); }
