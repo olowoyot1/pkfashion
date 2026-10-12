@@ -107,10 +107,6 @@
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     <span id="cart-badge" class="absolute -top-1 -right-1 bg-roseDeep text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
                 </button>
-                <button onclick="toggleAdminDashboard()" class="hidden sm:flex items-center space-x-1 px-3 py-1.5 bg-rosePrimary/20 text-roseDeep rounded-full text-xs font-semibold hover:bg-rosePrimary/30 transition-colors" title="Admin Dashboard">
-                    <i data-lucide="shield-check" class="w-4 h-4"></i>
-                    <span>Admin</span>
-                </button>
             </div>
         </div>
     </header>
@@ -134,10 +130,6 @@
                     <a href="#" onclick="filterByTag('sale'); toggleMobileMenu();" class="py-2 text-roseDeep font-semibold hover:text-charcoal transition-colors">Sales & Offers</a>
                     <a href="#" onclick="switchView('about'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">About Us</a>
                     <a href="#" onclick="switchView('contact'); toggleMobileMenu();" class="py-2 hover:text-roseDeep transition-colors">Contact</a>
-                    <a href="#" onclick="toggleAdminDashboard(); toggleMobileMenu();" class="py-2 text-roseDeep font-bold flex items-center space-x-2">
-                        <i data-lucide="shield-check" class="w-4 h-4"></i>
-                        <span>Admin Dashboard</span>
-                    </a>
                 </nav>
             </div>
             <div class="text-xs text-charcoal/60 text-center pb-4">
@@ -159,7 +151,7 @@
                             Your Style. <br><span class="italic font-normal text-roseDeep">Your Statement.</span>
                         </h1>
                         <p class="text-charcoal/80 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                            Discover ready-to-wear fashion that celebrates your confidence, individuality, and everyday elegance with luxurious fabrics and tailored fits.
+                            Discover African women’s ready-to-wear workwear—from polished English-style office tailoring to contemporary Nigerian native-inspired looks.
                         </p>
                         <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
                             <button onclick="switchView('shop')" class="w-full sm:w-auto px-8 py-4 bg-roseDeep text-white font-medium rounded-full shadow-lg hover:bg-charcoal transition-all duration-300 text-center tracking-wide">
@@ -939,7 +931,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-white/10">
             <div class="space-y-4">
                 <span class="font-serif text-2xl font-bold tracking-wider">PK FASHION</span>
-                <p class="text-white/70 text-sm leading-relaxed">Ready-to-wear fashion celebrating confidence, elegance, and modern individuality across Nigeria and beyond.</p>
+                <p class="text-white/70 text-sm leading-relaxed">African women’s ready-to-wear: refined English-style workwear and contemporary native-inspired looks.</p>
                 <div class="flex space-x-4">
 <a href="#" aria-label="PK Fashion on Instagram" class="p-2 bg-white/10 rounded-full hover:bg-roseDeep transition-colors"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/instagram.svg" alt="" class="w-4 h-4 invert" width="16" height="16"></a>
  <a href="#" aria-label="PK Fashion on Facebook" class="p-2 bg-white/10 rounded-full hover:bg-roseDeep transition-colors"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/facebook.svg" alt="" class="w-4 h-4 invert" width="16" height="16"></a>
@@ -985,29 +977,25 @@
     <script>
         // --- INITIAL APP STATE & LOCALSTORAGE ---
         const DEFAULT_PRODUCTS = [
-            { id: 'prod-1', name: 'The Rose Silk Midi Dress', category: 'Dresses', price: 85000, oldPrice: 100000, image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600', desc: 'Crafted from pure Italian silk in our signature rose pink. Features a flattering bias cut and adjustable straps.', tag: 'new', colors: ['Rose Pink', 'Charcoal Black', 'Ivory White'], sizes: ['XS', 'S', 'M', 'L'] },
-            { id: 'prod-2', name: 'Executive Tailored Blazer Set', category: 'Workwear', price: 145000, oldPrice: null, image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600', desc: 'A sophisticated two-piece suit tailored for the modern executive woman. Impeccable fit and premium crepe fabric.', tag: 'bestseller', colors: ['Blush Pink', 'Charcoal Black'], sizes: ['S', 'M', 'L', 'XL'] },
-            { id: 'prod-3', name: 'Pleated Chiffon Evening Gown', category: 'Occasion Wear', price: 180000, oldPrice: 210000, image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&q=80&w=600', desc: 'Breathtaking floor-length gown with delicate pleating and a graceful silhouette for upscale galas and weddings.', tag: 'sale', colors: ['Rose Deep', 'Champagne'], sizes: ['XS', 'S', 'M', 'L', 'XL'] },
-            { id: 'prod-4', name: 'Chic Satin Wrap Blouse', category: 'Tops & Blouses', price: 48000, oldPrice: null, image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600', desc: 'Versatile wrap blouse with gorgeous sheen. Pairs effortlessly with tailored trousers or denim.', tag: 'new', colors: ['Blush Pink', 'White', 'Charcoal'], sizes: ['XS', 'S', 'M', 'L'] },
-            { id: 'prod-5', name: 'High-Waist Wide Leg Trousers', category: 'Trousers & Jeans', price: 65000, oldPrice: null, image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=600', desc: 'Elongating wide-leg trousers designed for supreme comfort and polished everyday sophistication.', tag: 'bestseller', colors: ['Charcoal Black', 'Cream', 'Rose Pink'], sizes: ['S', 'M', 'L', 'XL'] },
-            { id: 'prod-6', name: 'Embroidered Two-Piece Leisure Set', category: 'Two-Piece Sets', price: 95000, oldPrice: 110000, image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&q=80&w=600', desc: 'Relaxed yet luxurious matching set featuring delicate embroidery along the cuffs and hem.', tag: 'sale', colors: ['Soft Blush', 'Cream'], sizes: ['XS', 'S', 'M', 'L'] },
-            { id: 'prod-7', name: 'Structured Mini Handbag', category: 'Accessories', price: 55000, oldPrice: null, image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600', desc: 'Handcrafted vegan leather mini bag with gold-tone hardware. The ultimate accessory for any outfit.', tag: 'new', colors: ['Rose Pink', 'Charcoal', 'White'], sizes: ['One Size'] },
-            { id: 'prod-8', name: 'Asymmetric Pleated Midi Skirt', category: 'Skirts', price: 58000, oldPrice: null, image: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&q=80&w=600', desc: 'Dynamic pleated midi skirt with an asymmetric hem that moves fluidly with every step.', tag: 'bestseller', colors: ['Rose Deep', 'Charcoal Black'], sizes: ['XS', 'S', 'M', 'L'] }
+            { id: 'prod-1', name: 'Executive Ankara Blazer & Trousers', category: 'English-Style Workwear', price: 145000, oldPrice: null, image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800', desc: 'A polished, modern office look pairing tailored Western silhouettes with vibrant Ankara accents.', tag: 'bestseller' },
+            { id: 'prod-2', name: 'Classic Corporate Midi Dress', category: 'English-Style Workwear', price: 98000, oldPrice: 115000, image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=800', desc: 'A refined, comfortable work dress with clean lines for meetings, presentations and everyday office wear.', tag: 'new' },
+            { id: 'prod-3', name: 'Ankara Peplum Skirt Suit', category: 'English-Style Workwear', price: 125000, oldPrice: null, image: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&q=80&w=800', desc: 'A feminine peplum jacket and fitted skirt set, tailored for a confident professional finish.', tag: 'bestseller' },
+            { id: 'prod-4', name: 'Adire Office Shirt & Trousers', category: 'English-Style Workwear', price: 89000, oldPrice: null, image: 'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=800', desc: 'Contemporary separates styled with the expressive character of Nigerian Adire textile.', tag: 'new' },
+            { id: 'prod-5', name: 'Modern Ankara Boubou Set', category: 'Native Workwear', price: 110000, oldPrice: null, image: 'https://images.unsplash.com/photo-153910448?auto=format&fit=crop&q=80&w=800', desc: 'An elegant, easy-moving native-inspired set designed for a stylish and comfortable workday.', tag: 'new' },
+            { id: 'prod-6', name: 'Adire Two-Piece Native Set', category: 'Native Workwear', price: 105000, oldPrice: 120000, image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=800', desc: 'A coordinated two-piece outfit celebrating rich indigo-inspired prints and contemporary tailoring.', tag: 'bestseller' },
+            { id: 'prod-7', name: 'Ankara Pencil Skirt & Blouse', category: 'Native Workwear', price: 92000, oldPrice: null, image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=800', desc: 'A versatile coordinated look blending a tailored office silhouette with African-inspired print.', tag: 'sale' },
+            { id: 'prod-8', name: 'Yoruba-Inspired Boubou Dress', category: 'Native Workwear', price: 135000, oldPrice: null, image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800', desc: 'A graceful, modern native-style dress for office days, client visits and smart occasions.', tag: 'new' }
         ];
 
         const CATEGORIES = [
-            { name: 'Dresses', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Tops & Blouses', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Two-Piece Sets', img: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Trousers & Jeans', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Skirts', img: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Casual Wear', img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Workwear', img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Occasion Wear', img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Accessories', img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=400' }
+            { name: 'English-Style Workwear', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=400' },
+            { name: 'Native Workwear', img: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=400' }
         ];
 
-        let products = JSON.parse(localStorage.getItem('pk_products')) || DEFAULT_PRODUCTS;
+        const savedProducts = JSON.parse(localStorage.getItem('pk_products') || 'null');
+        const hasLegacySampleProducts = Array.isArray(savedProducts) && savedProducts.some(p => /Rose Silk Midi Dress|Structured Mini Handbag|Pleated Chiffon Evening Gown/i.test(p.name || ''));
+        let products = savedProducts && !hasLegacySampleProducts ? savedProducts : DEFAULT_PRODUCTS;
+        if (hasLegacySampleProducts || !savedProducts) localStorage.setItem('pk_products', JSON.stringify(DEFAULT_PRODUCTS));
         let cart = JSON.parse(localStorage.getItem('pk_cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('pk_wishlist')) || [];
         let orders = JSON.parse(localStorage.getItem('pk_orders')) || [
