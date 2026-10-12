@@ -164,7 +164,7 @@
                     </div>
                     <div class="relative flex justify-center">
                         <div class="relative w-full max-w-md lg:max-w-lg aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                            <img src="https://images.pexels.com/photos/32093800/pexels-photo-32093800/free-photo-of-african-women-in-traditional-ankara-dresses.jpeg?auto=compress&cs=tinysrgb&w=900" alt="African women modelling colourful Ankara ready-to-wear fashion" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                            <img src="https://tjafricanprintdresses.com/cdn/shop/files/593e8ef21fb6108f9230c86973ba2afb.jpg?v=1770933644&width=720" alt="African woman wearing an Ankara blazer and trouser suit" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent flex items-end p-8">
                                 <div class="text-white">
                                     <p class="text-xs uppercase tracking-widest text-rosePrimary font-semibold">Featured African Look</p>
@@ -813,7 +813,7 @@ const sampleImageIds = new Set(['prod-1','prod-2','prod-3','prod-4','prod-5','pr
 if (Array.isArray(products)) {
     products = products.map(product => {
         const refreshed = DEFAULT_PRODUCTS.find(item => item.id === product.id);
-        if (refreshed && sampleImageIds.has(product.id) && /images\\.(unsplash|pexels)\\.com/.test(product.image || '')) {
+        if (refreshed && sampleImageIds.has(product.id) && /images\.(unsplash|pexels)\.com/.test(product.image || '')) {
             return { ...product, image: refreshed.image };
         }
         return product;
